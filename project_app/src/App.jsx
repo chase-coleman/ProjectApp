@@ -27,6 +27,7 @@ function App() {
 
   useEffect(() => {
     localStorage.setItem("balloons", JSON.stringify(balloonLocations));
+    console.log(balloonLocations)
   }, [balloonLocations]);
 
   return (

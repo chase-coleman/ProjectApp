@@ -13,21 +13,20 @@ const MOBILE_BREAKPOINT = 768;
 const cardData = [
   {
     color: "#060010",
-    title: "Analytics",
     description: "Track user behavior",
     label: "Insights",
     hasButtons: true,
   },
   {
     color: "#060010",
-    title: "Automation",
+    title: "Select a balloon location to get the weather there",
     description: "Streamline workflows",
     label: "Efficiency",
   },
   {
     color: "#060010",
-    title: "Collaboration",
-    description: "Work together seamlessly",
+    title: "Explore the World",
+    description: "View selected Windborne Balloons",
     label: "Teamwork",
     hasGlobe: true,
   },
@@ -570,7 +569,7 @@ const MagicBento = ({
                   ""
                 )}
                 <div className="magic-bento-card__content">
-                  {/* <h2 className="magic-bento-card__title">{card.title}</h2> */}
+                  <h2 className="magic-bento-card__title">{card.title}</h2>
                   {/* <p className="magic-bento-card__description">
                     {card.description}
                   </p> */}

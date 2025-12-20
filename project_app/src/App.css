@@ -132,7 +132,6 @@
 @media (max-width: 599px) {
   .card-grid {
     grid-template-columns: repeat(1, 1fr);
-    background-color: red;
     grid-template-rows: 150px auto;
     width: 90%;
     margin: 0 auto;

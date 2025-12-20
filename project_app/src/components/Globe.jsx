@@ -1,9 +1,11 @@
-import { Viewer } from "resium";
+import { Entity, Viewer } from "resium";
 import * as Cesium from "cesium";
-import { useRef, useEffect } from "react";
+import { useContext, useRef, useEffect } from "react";
+import { appContext } from "../App";
 
 const Globe = () => {
   const viewerRef = useRef(null);
+  const { balloonLocations } = useContext(appContext);
 
   useEffect(() => {
     const viewer = viewerRef.current?.cesiumElement;
@@ -35,8 +37,8 @@ const Globe = () => {
       full
       contextOptions={{
         webgl: {
-          alpha: true,                 // required :contentReference[oaicite:3]{index=3}
-          premultipliedAlpha: false,   // usually safer for CSS compositing
+          alpha: true, // required :contentReference[oaicite:3]{index=3}
+          premultipliedAlpha: false, // usually safer for CSS compositing
         },
       }}
       scene3DOnly
@@ -50,8 +52,19 @@ const Globe = () => {
       fullscreenButton={false}
       infoBox={false}
       selectionIndicator={false}
-    />
+    >
+      {balloonLocations.map(([lat, lon, alt], index) => (
+        <Entity
+          key={index}
+          position={Cesium.Cartesian3.fromDegrees(lon, lat, alt)}
+          point={{ pixelSize: 10 }}
+          onClick={() => {
+            console.log("clicked!", index)
+          }}
+        />
+      ))}
+    </Viewer>
   );
-}
+};
 
 export default Globe;
