@@ -2,10 +2,20 @@ import { StyledEngineProvider } from "@mui/material/styles";
 import "./App.css";
 import { DrawerAppBar } from "./components/Navbar";
 import { ButtonComponent } from "./components/ButtonComponent";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, createContext } from "react";
 import Aurora from "./components/Background";
 import Globe from "./components/Globe";
 import { handleWindborneCall } from "./functions/WindborneFuncs";
+import MagicBento from "./components/Dashboard";
+
+export const appContext = createContext({
+  positions: [],
+  setPositions: () => {},
+  isLoading: false,
+  setLoading: () => {},
+  balloonLocations: [],
+  setLocations: () => {}
+})
 
 function App() {
   const [positions, setPositions] = useState([]);
@@ -22,6 +32,14 @@ function App() {
   return (
     <>
       <StyledEngineProvider injectFirst>
+        <appContext.Provider value={{
+          positions,
+          setPositions,
+          isLoading,
+          setLoading,
+          balloonLocations,
+          setLocations
+        }}>
         {/* Background layer */}
         <div className="fixed inset-0 -z-10">
           <Aurora
@@ -37,18 +55,20 @@ function App() {
           <DrawerAppBar />
 
           <div className="flex-1 min-h-0 w-full flex flex-col items-center gap-3">
-            <ButtonComponent
+            <MagicBento enableMagnetism={false}/>
+            {/* <ButtonComponent
               text="Get Windborne Balloon Positions"
               styling="button-primary w-[300px] h-[60px]"
               loading={isLoading}
               onClick={() => handleWindborneCall(setLoading, setLocations)}
-            />
+            /> */}
 
             <div className="relative w-9/10 flex-1 min-h-0 p-5">
-              <Globe />
+              {/* <Globe /> */}
             </div>
           </div>
         </div>
+        </appContext.Provider>
       </StyledEngineProvider>
     </>
   );
