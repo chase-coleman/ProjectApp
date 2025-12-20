@@ -29,7 +29,7 @@ export function DrawerAppBar(props) {
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
       <Typography variant="h6" sx={{ my: 2 }}>
-        Plz Hire Me
+        Aeolus
       </Typography>
       <Divider />
       <List>
@@ -82,7 +82,7 @@ export function DrawerAppBar(props) {
               fontWeight: 500,
             }}
           >
-            Plz Hire Me
+            Aeolus
           </Typography>
           <Box sx={{ display: { xs: "none", sm: "block" } }}>
             {navItems.map((item) => (
