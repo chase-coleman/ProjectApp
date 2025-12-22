@@ -11,6 +11,7 @@ app.get("/health", (_req, res) => res.json({ ok: true }));
 app.get("/api/treasure/:timeStamp", async (req, res) => {
   try {
     const { timeStamp } = req.params; 
+    console.log(timeStamp)
 
     // protects against abritrary URLs
     if (!/^\d{2}\.json$/.test(timeStamp)) {

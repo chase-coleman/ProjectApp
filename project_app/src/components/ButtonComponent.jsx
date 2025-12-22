@@ -1,7 +1,7 @@
-import LoadingButton from "@mui/lab/LoadingButton";
+import Button from "@mui/material/Button";
 
 export const ButtonComponent = ({styling, text, onClick}) => {
   return (
-      <LoadingButton variant="outlined" onClick={onClick} className={styling}>{text}</LoadingButton>
+      <Button variant="outlined" onClick={onClick} className={styling}>{text}</Button>
   );
 }

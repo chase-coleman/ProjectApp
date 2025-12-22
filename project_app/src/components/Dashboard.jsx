@@ -4,33 +4,14 @@ import "../App.css";
 import Globe from "./Globe";
 import { ButtonComponent } from "./ButtonComponent";
 import { appContext } from "../App";
+import { handleWindborneCall } from "../functions/WindborneFuncs";
+import ButtonGroup from "@mui/material/ButtonGroup";
+import { cardData, buttonData } from "../data/vars";
 
 const DEFAULT_PARTICLE_COUNT = 12;
 const DEFAULT_SPOTLIGHT_RADIUS = 300;
 const DEFAULT_GLOW_COLOR = "132, 0, 255";
 const MOBILE_BREAKPOINT = 768;
-
-const cardData = [
-  {
-    color: "#060010",
-    description: "Track user behavior",
-    label: "Insights",
-    hasButtons: true,
-  },
-  {
-    color: "#060010",
-    title: "Select a balloon location to get the weather there",
-    description: "Streamline workflows",
-    label: "Efficiency",
-  },
-  {
-    color: "#060010",
-    title: "Explore the World",
-    description: "View selected Windborne Balloons",
-    label: "Teamwork",
-    hasGlobe: true,
-  },
-];
 
 const createParticleElement = (x, y, color = DEFAULT_GLOW_COLOR) => {
   const el = document.createElement("div");
@@ -502,7 +483,22 @@ const MagicBento = ({
   const gridRef = useRef(null);
   const isMobile = useMobileDetection();
   const shouldDisableAnimations = disableAnimations || isMobile;
-  const {isLoading, setLoading, setLocations} = useContext(appContext)
+  const { isLoading, setLoading, setLocations, time, setTime } =
+    useContext(appContext);
+
+    // calls the state setter to update the balloon locations at selected times and automatically calls the API func
+  const changeCallbackPeriod = (timePeriod) => {
+    try {
+      setTime(timePeriod);
+      handleWindborneCall(setLoading, setLocations, timePeriod);
+    } catch (err) {
+      console.error({
+        message: err.message,
+        stack: err.stack,
+        name: err.name,
+      });
+    }
+  };
 
   return (
     <>
@@ -545,25 +541,44 @@ const MagicBento = ({
                   <div className="magic-bento-card__label">{card.label}</div>
                 </div> */}
                 {card.hasGlobe ? (
-                  <Globe />
+                  <>
+                    <Globe />
+                    <div className="flex items-center">
+                      <ButtonGroup
+                        variant="contained"
+                        aria-label="Basic button group"
+                      >
+                        {buttonData.map((btn) => (
+                          <ButtonComponent
+                            text={btn.text}
+                            styling="button-primary"
+                            onClick={() => {
+                              changeCallbackPeriod(btn.timePeriod);
+                            }}
+                          />
+                        ))}
+                      </ButtonGroup>
+                    </div>
+                  </>
                 ) : card.hasButtons ? (
                   <>
-                  <ButtonComponent
-                    text="Get Windborne Balloon Positions"
-                    styling="button-primary h-[60px]"
-                    loading={isLoading}
-                    onClick={() =>
-                      handleWindborneCall(setLoading, setLocations)
-                    }
-                  />
-                  <ButtonComponent
-                    text="Get Storm Glass Data"
-                    styling="button-primary h-[60px]"
-                    loading={isLoading}
-                    onClick={() =>
-                      handleWindborneCall(setLoading, setLocations)
-                    }
-                  />
+                    <ButtonComponent
+                      text="Get Windborne Balloon Positions"
+                      styling="button-primary h-[60px]"
+                      loading={isLoading}
+                      onClick={() =>
+                        handleWindborneCall(
+                          setLoading,
+                          setLocations,
+                          time ?? "01"
+                        )
+                      }
+                    />
+                    <ButtonComponent
+                      text="Get Storm Glass Data"
+                      styling="button-primary h-[60px]"
+                      loading={isLoading}
+                    />
                   </>
                 ) : (
                   ""
