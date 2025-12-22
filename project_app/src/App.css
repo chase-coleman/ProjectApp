@@ -67,6 +67,10 @@
   --glow-intensity: 0;
   --glow-radius: 200px;
 }
+.magic-bento-card:nth-child(1) {
+  /* background-color: transparent !important; */
+  border: none !important;
+}
 
 .magic-bento-card:hover {
   transform: translateY(-2px);
@@ -132,7 +136,7 @@
 @media (max-width: 599px) {
   .card-grid {
     grid-template-columns: repeat(1, 1fr);
-    grid-template-rows: 150px auto;
+    grid-template-rows: 200px auto;
     width: 90%;
     margin: 0 auto;
     padding: 0.5em;
@@ -146,17 +150,16 @@
     max-width: 100%;
     max-height: 100px;
     grid-column: span 1;
-    grid-row: span 2;
+    grid-row: span 1;
   }
   .magic-bento-card:nth-child(2) {
     max-height: 10em;
     grid-column: span 1;
-    grid-row: span 2;
+    grid-row: span 1;
   }
   .magic-bento-card:nth-child(3) {
-    min-height: 20em;
+    min-height: 35em;
     grid-column: span 1;
-    grid-row: span 2;
   }
 }
 
@@ -164,7 +167,7 @@
   .card-grid {
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: 150px auto;
-    grid-auto-rows: 300px;
+    grid-auto-rows: 400px;
   }
   .magic-bento-card:nth-child(1) {
     max-width: 100%;

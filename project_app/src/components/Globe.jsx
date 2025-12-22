@@ -73,7 +73,7 @@ const Globe = () => {
             position={Cesium.Cartesian3.fromDegrees(lon, lat, alt)}
             point={{ pixelSize: 10 }}
             onClick={() => {
-              console.log("clicked!", index);
+              console.log("clicked!", index, lon, lat);
             }}
           />
         );

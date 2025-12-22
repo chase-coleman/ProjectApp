@@ -7,6 +7,7 @@ import { appContext } from "../App";
 import { handleWindborneCall } from "../functions/WindborneFuncs";
 import ButtonGroup from "@mui/material/ButtonGroup";
 import { cardData, buttonData } from "../data/vars";
+import CardDisplay from "./CardDisplay";
 
 const DEFAULT_PARTICLE_COUNT = 12;
 const DEFAULT_SPOTLIGHT_RADIUS = 300;
@@ -486,7 +487,7 @@ const MagicBento = ({
   const { isLoading, setLoading, setLocations, time, setTime } =
     useContext(appContext);
 
-    // calls the state setter to update the balloon locations at selected times and automatically calls the API func
+  // calls the state setter to update the balloon locations at selected times and automatically calls the API func
   const changeCallbackPeriod = (timePeriod) => {
     try {
       setTime(timePeriod);
@@ -498,6 +499,11 @@ const MagicBento = ({
         name: err.name,
       });
     }
+  };
+
+  const clearLocations = () => {
+    localStorage.removeItem("balloons");
+    setLocations([]);
   };
 
   return (
@@ -537,58 +543,19 @@ const MagicBento = ({
                 clickEffect={clickEffect}
                 enableMagnetism={enableMagnetism}
               >
-                {/* <div className="magic-bento-card__header">
-                  <div className="magic-bento-card__label">{card.label}</div>
-                </div> */}
-                {card.hasGlobe ? (
-                  <>
-                    <Globe />
-                    <div className="flex items-center">
-                      <ButtonGroup
-                        variant="contained"
-                        aria-label="Basic button group"
-                      >
-                        {buttonData.map((btn) => (
-                          <ButtonComponent
-                            text={btn.text}
-                            styling="button-primary"
-                            onClick={() => {
-                              changeCallbackPeriod(btn.timePeriod);
-                            }}
-                          />
-                        ))}
-                      </ButtonGroup>
-                    </div>
-                  </>
-                ) : card.hasButtons ? (
-                  <>
-                    <ButtonComponent
-                      text="Get Windborne Balloon Positions"
-                      styling="button-primary h-[60px]"
-                      loading={isLoading}
-                      onClick={() =>
-                        handleWindborneCall(
-                          setLoading,
-                          setLocations,
-                          time ?? "01"
-                        )
-                      }
-                    />
-                    <ButtonComponent
-                      text="Get Storm Glass Data"
-                      styling="button-primary h-[60px]"
-                      loading={isLoading}
-                    />
-                  </>
-                ) : (
-                  ""
-                )}
-                <div className="magic-bento-card__content">
-                  <h2 className="magic-bento-card__title">{card.title}</h2>
-                  {/* <p className="magic-bento-card__description">
-                    {card.description}
-                  </p> */}
-                </div>
+                <CardDisplay
+                  globe={card.hasGlobe}
+                  buttons={card.hasButtons}
+                  card={card}
+                  buttonData={buttonData}
+                  changeCallbackPeriod={changeCallbackPeriod}
+                  clearLocations={clearLocations}
+                  isLoading={isLoading}
+                  handleWindborneCall={handleWindborneCall}
+                  setLoading={setLoading}
+                  setLocations={setLocations}
+                  time={time}
+                />
               </ParticleCard>
             );
           }
