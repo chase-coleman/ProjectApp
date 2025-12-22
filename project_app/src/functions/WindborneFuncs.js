@@ -5,7 +5,7 @@ export const handleWindborneCall = async (
 ) => {
   setLoading(true);
 
-  const url = `http://localhost:3001/api/treasure/${encodeURIComponent( //encodeURIComponent makes a string safe for URL paths
+  const url = `/api/treasure/${encodeURIComponent( //encodeURIComponent makes a string safe for URL paths
     timePeriod
   )}.json`;
 

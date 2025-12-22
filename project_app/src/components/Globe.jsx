@@ -2,12 +2,13 @@ import { Entity, Viewer } from "resium";
 import * as Cesium from "cesium";
 import { useContext, useRef, useEffect, useMemo } from "react";
 import { appContext } from "../App";
+import getLocalData from "../functions/WeatherAPIFunctions";
 
 const Globe = () => {
   const viewerRef = useRef(null);
   const { balloonLocations } = useContext(appContext);
 
-  // memorizes the values - so in the Globe component, everytime the Viewer is re-created - it's not taking in a new contextOptions 
+  // memorizes the values - so in the Globe component, everytime the Viewer is re-created - it's not taking in a new contextOptions
   // - therefore not re-rendering the globe and losing the created entities. needed because the first API call was always getting re-rendered
   const contextOptions = useMemo(
     () => ({
@@ -73,7 +74,7 @@ const Globe = () => {
             position={Cesium.Cartesian3.fromDegrees(lon, lat, alt)}
             point={{ pixelSize: 10 }}
             onClick={() => {
-              console.log("clicked!", index, lon, lat);
+              getLocalData({ index, lon, lat });
             }}
           />
         );
