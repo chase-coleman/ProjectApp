@@ -17,7 +17,6 @@
       return data
     } catch (err) {
       console.error("Failed getting local info",{
-        url,
         message: err.message,
         stack: err.stack,
         name: err.name,

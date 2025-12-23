@@ -504,6 +504,7 @@ const MagicBento = ({
   const clearLocations = () => {
     localStorage.removeItem("balloons");
     setLocations([]);
+    setTime(null)
   };
 
   return (

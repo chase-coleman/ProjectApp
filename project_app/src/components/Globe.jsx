@@ -1,11 +1,13 @@
 import { Entity, Viewer } from "resium";
 import * as Cesium from "cesium";
-import { useContext, useRef, useEffect, useMemo } from "react";
+import { useContext, useRef, useEffect, useMemo, useState } from "react";
 import { appContext } from "../App";
 import getLocalData from "../functions/WeatherAPIFunctions";
+import { Color } from "cesium";
 
 const Globe = () => {
   const viewerRef = useRef(null);
+  const [selectedLocation, setSelectedLocation] = useState(null)
   const { balloonLocations, setLocalData } = useContext(appContext);
 
   // memorizes the values - so in the Globe component, everytime the Viewer is re-created - it's not taking in a new contextOptions
@@ -50,6 +52,7 @@ const Globe = () => {
   const handleEntityClick = async (location) => {
     const data = await getLocalData(location);
     setLocalData(data)    
+    setSelectedLocation(location.key)
   };
 
   return (
@@ -77,9 +80,9 @@ const Globe = () => {
           <Entity
             key={key}
             position={Cesium.Cartesian3.fromDegrees(lon, lat, alt)}
-            point={{ pixelSize: 10 }}
+            point={{ pixelSize: 10, color: key === selectedLocation ? Color.RED : Color.WHITE }}
             onClick={() => {
-              handleEntityClick({ index, lon, lat });
+              handleEntityClick({ key, index, lon, lat });
             }}
           />
         );

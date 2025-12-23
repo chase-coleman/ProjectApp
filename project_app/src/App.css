@@ -19,9 +19,17 @@
 }
 .button-primary:hover {
   /* background-color: transparent !important; */
-  background-color: rgb(123, 150, 129);
+  background-color: rgba(132, 0, 255, 1);
   color: white !important;
   text-decoration: underline;
+}
+
+.button-selected {
+  font-weight: 500;
+  border-radius: 10px;
+  border: 2px solid black !important;
+  background-color: rgba(132, 0, 255, 1);
+  color: white !important;
 }
 .cesium-viewer-bottom {
   display: none;
@@ -68,8 +76,7 @@
   --glow-radius: 200px;
 }
 .magic-bento-card:nth-child(1) {
-  /* background-color: transparent !important; */
-  border: none !important;
+
 }
 
 .magic-bento-card:hover {
@@ -153,9 +160,8 @@
     grid-row: span 1;
   }
   .magic-bento-card:nth-child(2) {
-    max-height: 10em;
     grid-column: span 1;
-    grid-row: span 1;
+    grid-row: span ;
   }
   .magic-bento-card:nth-child(3) {
     min-height: 35em;

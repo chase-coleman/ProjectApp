@@ -30,7 +30,7 @@ const CardDisplay = ({
               <ButtonComponent
                 key={btn.text}
                 text={btn.text}
-                styling="button-primary !p-[.5px]"
+                styling={time == btn.timePeriod ? "!p-[.5px] button-selected " :"button-primary !p-[.5px]"}
                 onClick={() => changeCallbackPeriod(btn.timePeriod)}
               />
             ))}
@@ -71,7 +71,7 @@ const CardDisplay = ({
 
   return (
     <>
-    <div className="!bg-red-500 w-full h-full">
+    <div className=" flex justify-center items-center w-full h-full">
   <LocationData />
     </div>
     </>
