@@ -6,7 +6,7 @@ import { useEffect, useState, useRef, createContext } from "react";
 import Aurora from "./components/Background";
 import MagicBento from "./components/Dashboard";
 import { Routes, Route, Link } from "react-router-dom";
-import About from "./pages/About"
+import {About} from "./pages/About"
 
 export const AppContext = createContext({
   positions: [],
