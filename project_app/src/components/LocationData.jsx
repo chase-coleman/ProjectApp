@@ -4,11 +4,11 @@ import Stack from "@mui/material/Stack";
 import Divider from "@mui/material/Divider";
 import Typography from "@mui/material/Typography";
 import { useContext, useState } from "react";
-import { appContext } from "../App";
+import { AppContext } from "../App";
 import { Celsius, Fahrenheit } from "../assets/icons";
 
 const LocationData = () => {
-  const { localData } = useContext(appContext);
+  const { localData } = useContext(AppContext);
   const [error, setError] = useState(false);
   const [errorMsg, setErrorMsg] = useState(
     "Unable to collect local info for selected location."

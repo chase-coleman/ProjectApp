@@ -5,8 +5,10 @@ import { ButtonComponent } from "./components/ButtonComponent";
 import { useEffect, useState, useRef, createContext } from "react";
 import Aurora from "./components/Background";
 import MagicBento from "./components/Dashboard";
+import { Routes, Route, Link } from "react-router-dom";
+import About from "./pages/About"
 
-export const appContext = createContext({
+export const AppContext = createContext({
   positions: [],
   setPositions: () => {},
   isLoading: false,
@@ -56,7 +58,6 @@ function App() {
 
   useEffect(() => {
     if (!localData || Object.keys(localData).length === 0) return;
-    console.log(localData)
     try {
       const valid = validateShape(localData);
       localStorage.setItem("localData", JSON.stringify(valid));
@@ -72,7 +73,7 @@ function App() {
   return (
     <>
       <StyledEngineProvider injectFirst>
-        <appContext.Provider
+        <AppContext.Provider
           value={{
             positions,
             setPositions,
@@ -95,8 +96,9 @@ function App() {
               speed={0.5}
             />
           </div>
+            <Routes>
 
-          {/* Foreground content */}
+          <Route path="/" element={
           <div className="relative z-10 min-h-screen w-screen flex flex-col">
             <DrawerAppBar />
 
@@ -104,8 +106,10 @@ function App() {
               <MagicBento enableMagnetism={false} />
               <div className="relative w-9/10 flex-1 min-h-0 p-5"></div>
             </div>
-          </div>
-        </appContext.Provider>
+          </div>}/>
+          <Route path="/about" element={<About />}/>
+      </Routes>
+        </AppContext.Provider>
       </StyledEngineProvider>
     </>
   );

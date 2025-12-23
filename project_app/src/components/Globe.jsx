@@ -1,14 +1,14 @@
 import { Entity, Viewer } from "resium";
 import * as Cesium from "cesium";
 import { useContext, useRef, useEffect, useMemo, useState } from "react";
-import { appContext } from "../App";
+import { AppContext } from "../App";
 import getLocalData from "../functions/WeatherAPIFunctions";
 import { Color } from "cesium";
 
 const Globe = () => {
   const viewerRef = useRef(null);
   const [selectedLocation, setSelectedLocation] = useState(null)
-  const { balloonLocations, setLocalData } = useContext(appContext);
+  const { balloonLocations, setLocalData } = useContext(AppContext);
 
   // memorizes the values - so in the Globe component, everytime the Viewer is re-created - it's not taking in a new contextOptions
   // - therefore not re-rendering the globe and losing the created entities. needed because the first API call was always getting re-rendered
