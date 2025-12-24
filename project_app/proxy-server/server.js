@@ -28,11 +28,21 @@ const allowedOrigins = new Set([
 app.use(
   cors({
     origin: (origin, cb) => {
-      if (!origin) return cb(null, true); // curl/postman
-      cb(null, allowedOrigins.has(origin));
+      // allow server-to-server, curl, health checks
+      if (!origin) return cb(null, true);
+
+      if (allowedOrigins.has(origin)) {
+        return cb(null, true);
+      }
+
+      // hard fail so issues show up clearly
+      return cb(new Error(`CORS blocked for origin: ${origin}`));
     },
+    methods: ["GET", "OPTIONS"],
+    allowedHeaders: ["Content-Type"],
   })
 );
+app.options("*", cors());
 
 app.get("/health", (_req, res) => res.json({ ok: true }));
 
