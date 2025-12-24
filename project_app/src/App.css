@@ -75,9 +75,11 @@
   --glow-intensity: 0;
   --glow-radius: 200px;
 }
-.magic-bento-card:nth-child(1) {
 
-}
+.magic-bento-card:nth-child(3) {
+    height: 30em;
+    grid-column: span 1;
+  }
 
 .magic-bento-card:hover {
   transform: translateY(-2px);
@@ -209,6 +211,11 @@
   .magic-bento-card:nth-child(3) {
     grid-column: span 4;
     grid-row: span 2;
+  }
+}
+@media (min-height: 1100px) {
+  .magic-bento-card:nth-child(3) {
+    min-height: 35em;
   }
 }
 

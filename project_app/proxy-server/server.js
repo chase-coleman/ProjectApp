@@ -16,8 +16,7 @@ if (!WEATHER_API) throw new Error("Missing WEATHER_API");
 const PORT = process.env.PORT || 3001;
 
 const allowedOrigins = new Set([
-  "http://localhost:5173",
-  "https://yourdomain.com", // will change when hosted live
+  "https://anemoi-6ww2.onrender.com"
 ]);
 
 app.use(
