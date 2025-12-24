@@ -15,7 +15,7 @@ if (!WINDBORNE_URL) throw new Error("Missing WINDBORNE_URL");
 if (!WEATHER_API) throw new Error("Missing WEATHER_API");
 if (!WEATHER_API) throw new Error("Missing WEATHER_API");
 if (!RENDER_DOMAIN_DEFAULT) throw new Error("missing Default Domain");
-IF (!RENDER_DOMAIN_STANDARD) throw new Error("missing Standard Domain")
+if (!RENDER_DOMAIN_STANDARD) throw new Error("missing Standard Domain")
 
 const PORT = process.env.PORT || 3001;
 
