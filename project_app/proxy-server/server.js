@@ -8,17 +8,21 @@ const app = express();
 const WINDBORNE_URL = process.env.WINDBORNE_URL;
 const WEATHER_API = process.env.WEATHER_API;
 const WEATHER_API_KEY = process.env.WEATHER_API_KEY;
-const VITE_RENDER_DOMAIN_DEFAULT = process.env.VITE_RENDER_DOMAIN_DEFAULT
+const RENDER_DOMAIN_DEFAULT = process.env.RENDER_DOMAIN_DEFAULT
+const RENDER_DOMAIN_STANDARD = process.env.RENDER_DOMAIN_STANDARD
 
 if (!WINDBORNE_URL) throw new Error("Missing WINDBORNE_URL");
 if (!WEATHER_API) throw new Error("Missing WEATHER_API");
 if (!WEATHER_API) throw new Error("Missing WEATHER_API");
-if (!VITE_RENDER_DOMAIN_DEFAULT) throw new Error("missing Default Domain");
+if (!RENDER_DOMAIN_DEFAULT) throw new Error("missing Default Domain");
+IF (!RENDER_DOMAIN_STANDARD) throw new Error("missing Standard Domain")
 
 const PORT = process.env.PORT || 3001;
 
 const allowedOrigins = new Set([
-  VITE_RENDER_DOMAIN_DEFAULT,
+  RENDER_DOMAIN_DEFAULT,
+  RENDER_DOMAIN_STANDARD
+
 ]);
 
 app.use(
