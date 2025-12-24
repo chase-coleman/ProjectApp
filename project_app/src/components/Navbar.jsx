@@ -57,7 +57,7 @@ export function DrawerAppBar(props) {
     window !== undefined ? () => window().document.body : undefined;
 
   return (
-    <Box sx={{ display: "flex", justifyContent: "center" }}>
+    <Box sx={{ display: "flex", justifyContent: "center", maxHeight: 80 }}>
       <CssBaseline />
       <AppBar
         component="nav"
