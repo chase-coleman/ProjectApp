@@ -2,6 +2,8 @@ import { ButtonComponent } from "./ButtonComponent";
 import Globe from "./Globe";
 import ButtonGroup from "@mui/material/ButtonGroup";
 import LocationData from "./LocationData";
+import { useContext } from "react";
+import { AppContext } from "../App";
 
 const CardDisplay = ({
   globe,
@@ -16,6 +18,15 @@ const CardDisplay = ({
   setLocations,
   time,
 }) => {
+  const { localData } = useContext(AppContext)
+
+  const hasLocalData =
+    localData &&
+    typeof localData === "object" &&
+    Object.keys(localData).length > 0;
+
+  const hasDataNoLocal = localData && typeof localData === "object" && Object.keys(localData).length === 0
+
   if (globe) {
     return (
       <>
@@ -71,9 +82,19 @@ const CardDisplay = ({
 
   return (
     <>
-    <div className=" flex justify-center items-center w-full h-full">
-  <LocationData />
-    </div>
+<div className="flex justify-center items-center w-full h-full">
+  {!localData ? (
+    <span className="text-sm text-white">
+      Unavailable data for this location.
+    </span>
+  ) : Object.keys(localData).length > 0 ? (
+    <LocationData />
+  ) : (
+    <span className="text-sm text-white">
+      Interact with the globe to retrieve local weather data from a selected Windborne balloon!
+    </span>
+  )}
+</div>
     </>
   );
 };

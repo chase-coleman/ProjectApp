@@ -1,0 +1,10 @@
+
+@font-face {
+  font-family: "ocean";
+  src: url("./blueocean.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "domine";
+  src: url("./Domine-Regular.ttf") format("truetype");
+}

@@ -4,18 +4,18 @@ import Stack from "@mui/material/Stack";
 import Divider from "@mui/material/Divider";
 import Typography from "@mui/material/Typography";
 import { useContext, useState } from "react";
-import { appContext } from "../App";
+import { AppContext } from "../App";
 import { Celsius, Fahrenheit } from "../assets/icons";
 
 const LocationData = () => {
-  const { localData } = useContext(appContext);
+  const { localData } = useContext(AppContext);
   const [error, setError] = useState(false);
   const [errorMsg, setErrorMsg] = useState(
     "Unable to collect local info for selected location."
   );
 
   return (
-    <Card variant="outlined" sx={{ maxWidth: 600, height: "100%", borderRadius: 5, pr: 2, pl: 2, backgroundColor: "rgb(22, 22, 22);", color: "white" }}>
+    <Card variant="outlined" sx={{ minWidth: 300,width: 450, maxWidth: 600, height: "100%", borderRadius: 5, pr: 2, pl: 2, backgroundColor: "rgb(22, 22, 22);", color: "white" }}>
       <Box sx={{ p: 2 }}>
         <Stack
           direction="row"
@@ -63,7 +63,7 @@ const LocationData = () => {
             <span>{errorMsg}</span>
           )}
           {localData?.current?.current?.gust_mph
-            ? `with winds up to ${localData?.current?.current?.gust_mph} mph`
+            ? ` with winds up to ${localData?.current?.current?.gust_mph} mph`
             : ""}{" "}
           
           {localData?.forecast?.forecast?.forecastday[0]?.day

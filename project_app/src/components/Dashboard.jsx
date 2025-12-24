@@ -3,7 +3,7 @@ import { gsap } from "gsap";
 import "../App.css";
 import Globe from "./Globe";
 import { ButtonComponent } from "./ButtonComponent";
-import { appContext } from "../App";
+import { AppContext } from "../App";
 import { handleWindborneCall } from "../functions/WindborneFuncs";
 import ButtonGroup from "@mui/material/ButtonGroup";
 import { cardData, buttonData } from "../data/vars";
@@ -484,8 +484,8 @@ const MagicBento = ({
   const gridRef = useRef(null);
   const isMobile = useMobileDetection();
   const shouldDisableAnimations = disableAnimations || isMobile;
-  const { isLoading, setLoading, setLocations, time, setTime, localData } =
-    useContext(appContext);
+  const { isLoading, setLoading, setLocations, time, setTime, localData, setLocalData } =
+    useContext(AppContext);
 
   // calls the state setter to update the balloon locations at selected times and automatically calls the API func
   const changeCallbackPeriod = (timePeriod) => {
@@ -503,8 +503,10 @@ const MagicBento = ({
 
   const clearLocations = () => {
     localStorage.removeItem("balloons");
+    localStorage.removeItem("localData")
     setLocations([]);
     setTime(null)
+    setLocalData({})
   };
 
   return (
