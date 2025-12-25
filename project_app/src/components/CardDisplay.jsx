@@ -4,6 +4,7 @@ import ButtonGroup from "@mui/material/ButtonGroup";
 import LocationData from "./LocationData";
 import { useContext } from "react";
 import { AppContext } from "../App";
+import Tooltip from "@mui/material/Tooltip";
 
 const CardDisplay = ({
   globe,
@@ -18,14 +19,17 @@ const CardDisplay = ({
   setLocations,
   time,
 }) => {
-  const { localData } = useContext(AppContext)
+  const { localData } = useContext(AppContext);
 
   const hasLocalData =
     localData &&
     typeof localData === "object" &&
     Object.keys(localData).length > 0;
 
-  const hasDataNoLocal = localData && typeof localData === "object" && Object.keys(localData).length === 0
+  const hasDataNoLocal =
+    localData &&
+    typeof localData === "object" &&
+    Object.keys(localData).length === 0;
 
   if (globe) {
     return (
@@ -38,12 +42,36 @@ const CardDisplay = ({
             className="flex flex-wrap justify-center"
           >
             {buttonData.map((btn) => (
-              <ButtonComponent
-                key={btn.text}
-                text={btn.text}
-                styling={time == btn.timePeriod ? "!p-[.5px] button-selected " :"button-primary !p-[.5px]"}
-                onClick={() => changeCallbackPeriod(btn.timePeriod)}
-              />
+              <Tooltip
+                title={`Balloon positions ${btn.text} hrs ago`}
+                arrow
+                slotProps={{
+                  tooltip: {
+                    sx: {
+                      bgcolor: "rgba(132, 0, 255, 1)",
+                      color: "#fff",
+                      fontSize: "0.75rem",
+                      px: "10px",
+                      py: "6px",
+                      borderRadius: "2px",
+                    },
+                  },
+                  arrow: {
+                    sx: { color: "rgba(132, 0, 255, 1)" },
+                  },
+                }}
+              >
+                <ButtonComponent
+                  key={btn.text}
+                  text={btn.text}
+                  styling={
+                    time == btn.timePeriod
+                      ? "!p-[.5px] button-selected "
+                      : "button-primary !p-[.5px]"
+                  }
+                  onClick={() => changeCallbackPeriod(btn.timePeriod)}
+                />
+              </Tooltip>
             ))}
             <ButtonComponent
               text="Clear"
@@ -82,19 +110,20 @@ const CardDisplay = ({
 
   return (
     <>
-<div className="flex justify-center items-center w-full h-full">
-  {!localData ? (
-    <span className="text-sm text-white">
-      Unavailable data for this location.
-    </span>
-  ) : Object.keys(localData).length > 0 ? (
-    <LocationData />
-  ) : (
-    <span className="text-sm text-white">
-      Interact with the globe to retrieve local weather data from a selected Windborne balloon!
-    </span>
-  )}
-</div>
+      <div className="flex justify-center items-center w-full h-full">
+        {!localData ? (
+          <span className="text-sm text-white">
+            Unavailable data for this location.
+          </span>
+        ) : Object.keys(localData).length > 0 ? (
+          <LocationData />
+        ) : (
+          <span className="text-sm text-white">
+            Interact with the globe to retrieve local weather data from a
+            selected Windborne balloon!
+          </span>
+        )}
+      </div>
     </>
   );
 };
