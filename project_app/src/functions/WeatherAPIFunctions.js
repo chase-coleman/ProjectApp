@@ -1,5 +1,7 @@
+const VITE_RENDER_DOMAIN_DEFAULT = import.meta.env.VITE_RENDER_DOMAIN_DEFAULT
+  
   const getLocalData = async (location) => {
-    const url = `/api/treasure/${encodeURIComponent(
+    const url = `${VITE_RENDER_DOMAIN_DEFAULT}/api/treasure/${encodeURIComponent(
       location.lat
     )}/${encodeURIComponent(location.lon)}`;
     try {
