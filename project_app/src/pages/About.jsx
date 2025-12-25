@@ -93,7 +93,7 @@ export const About = () => {
               browser - I had to create a proxy server. I didn't want to create
               a full Django/Spring backend for the project as that would be
               overkill for something this size. And for that reason - I decided
-              to to Express. I had never worked with Express before, but the
+              to use Express. I had never worked with Express before, but the
               requirements I needed were pretty simple so it only took a little
               bit of time before I got it up and running.
             </span>
